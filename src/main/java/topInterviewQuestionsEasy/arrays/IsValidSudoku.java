@@ -46,20 +46,18 @@ public class IsValidSudoku {
 				if (board[i][j] != '.' && board[i][j] < '1' && board[i][j] > '9')
 					return false;
 
-				// row check
+				int rowValue = board[i][j] - '0' - 1;
+				int colValue = board[j][i] - '0' - 1;
+				// row check & grid check
 				if (board[i][j] != '.') {
-					rowCheck.add(Integer.valueOf(String.valueOf(board[i][j])));
+					rowCheck.add(rowValue);
+					int chkIdx = mapping(mapping(i), mapping(j));
+					gridCheck.get(chkIdx).add(rowValue);
 				}
 
 				// col check
 				if (board[j][i] != '.') {
-					colCheck.add(Integer.valueOf(String.valueOf(board[j][i])));
-				}
-
-				// for grid check
-				if (board[i][j] != '.') {
-					int chkIdx = mapping(mapping(i), mapping(j));
-					gridCheck.get(chkIdx).add(Integer.valueOf(String.valueOf(board[i][j])));
+					colCheck.add(colValue);
 				}
 			}
 
@@ -118,12 +116,14 @@ public class IsValidSudoku {
 	}
 
 	private boolean checkDuplications(List<Integer> list) {
-		Map<Integer, Integer> checkMap = new HashMap<>();
-		for (Integer i : list) {
-			if (checkMap.get(i) == null) {
-				checkMap.put(i, 1);
-			} else {
-				return false;
+		for (int i = 0; i < list.size(); i++) {
+			int count = 0;
+			for (int j = 0; j < list.size(); j++) {
+				if (list.get(j) == list.get(i)) {
+					count++;
+				}
+				if (count > 1)
+					return false;
 			}
 		}
 		return true;
