@@ -17,5 +17,8 @@ public class playground {
 		
 		Arrays.stream(new int[] { 1, 2, 3, 4 }).forEach(System.out::println);
 		System.out.println();
+		
+		
+		
 	}
 }
