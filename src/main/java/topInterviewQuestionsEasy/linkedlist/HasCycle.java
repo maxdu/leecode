@@ -7,7 +7,7 @@ public class HasCycle {
 		HasCycle rs = new HasCycle();
 
 		System.out.println(String.format("%s", rs.hasCycle(ListNode.getCycleList())));
-		System.out.println(String.format("%s", rs.hasCycle(ListNode.getNoCycleList())));
+		System.out.println(String.format("%s", rs.hasCycle(ListNode.getNoCycleList7())));
 		System.out.println(String.format("%s", rs.hasCycle(ListNode.getCycleList2())));
 
 	}
