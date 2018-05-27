@@ -1,13 +1,17 @@
 package topInterviewQuestionsEasy.linkedlist;
 
+import java.math.BigDecimal;
+
 public class ListNode {
 
-	int val;
-	ListNode next;
+	public int val;
+	public ListNode next;
+	public int id;
 
 	public ListNode(int x) {
 		val = x;
 		next = null;
+		id = new BigDecimal(Math.random() * 1000).intValue();
 	}
 
 	public static void main(String[] args) {
@@ -103,12 +107,14 @@ public class ListNode {
 
 	public static void printAll(ListNode node) {
 		System.out.println();
-		System.out.println(String.format("node %s, value %s, next %s", System.identityHashCode(node), node.val,
-				System.identityHashCode(node.next)));
-		while (node.next != null) {
+		if (node == null)
+			return;
+		System.out.println(String.format("node %s, value %s, next %s, id %s", System.identityHashCode(node),
+				node != null ? node.val : "", node != null ? System.identityHashCode(node.next) : "", node.id));
+		while (node != null && node.next != null) {
 			node = node.next;
-			System.out.println(String.format("node %s, value %s, next %s", System.identityHashCode(node), node.val,
-					System.identityHashCode(node.next)));
+			System.out.println(String.format("node %s, value %s, next %s, id %s", System.identityHashCode(node),
+					node.val, System.identityHashCode(node.next), node.id));
 		}
 
 	}
@@ -122,6 +128,24 @@ public class ListNode {
 			node.next = new ListNode(i++ * mutipler);
 			node = node.next;
 		}
+		return head;
+	}
+
+	public static ListNode get(int size, int[] values) {
+
+		ListNode head = null;
+		ListNode pre = null;
+		for (int i = 0; i < size; i++) {
+			ListNode node = new ListNode(values[i]);
+			if (i == 0) {
+				head = node;
+			}
+			if (pre != null) {
+				pre.next = node;
+			}
+			pre = node;
+		}
+
 		return head;
 	}
 }
